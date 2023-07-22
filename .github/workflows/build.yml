@@ -32,6 +32,8 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -r requirements.txt
       - run: sh scripts/parepare-scikit-image-docs.sh
+        env:
+          SCIKIT_IMAGE_VERSION: 0.19.3
       - uses: ammaraskar/sphinx-action@master
         with:
           docs-folder: "build/scikit-image/doc"
@@ -45,7 +47,6 @@ jobs:
         run: |
           python scripts/build_vector_database.py
         env:
-          SCIKIT_IMAGE_VERSION: 0.19.3
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
