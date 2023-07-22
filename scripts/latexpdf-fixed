@@ -3,5 +3,8 @@ latexpdf-fixed: latex
 	$(SPHINXBUILD) -b latex $(ALLSPHINXOPTS) $(DEST)/latex
 	@echo "Running LaTeX files through pdflatex..."
 	sed -i '/\\sphinxDUC{2572}{\\textbackslash}/i \  \\sphinxDUC{2663}{\\sphinxunichar{2663}}' build/latex/scikit-image.tex && \
+    sed -i '/\\sphinxDUC{2572}{\\textbackslash}/i \  \\sphinxDUC{5468}{\\sphinxunichar{5468}}' build/latex/scikit-image.tex && \
+    sed -i '/\\sphinxDUC{2572}{\\textbackslash}/i \  \\sphinxDUC{4F2F}{\\sphinxunichar{4F2F}}' build/latex/scikit-image.tex && \
+    sed -i '/\\sphinxDUC{2572}{\\textbackslash}/i \  \\sphinxDUC{5A01}{\\sphinxunichar{5A01}}' build/latex/scikit-image.tex && \
     cd build/latex && pdflatex --interaction=nonstopmode scikit-image.tex
 	@echo "pdflatex finished; the PDF files are in build/latex."
