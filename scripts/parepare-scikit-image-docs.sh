@@ -4,4 +4,4 @@ mkdir -p build
 cd build
 # if scikit-image folder not exist, clone it
 [ ! -d scikit-image ] && git clone https://github.com/scikit-image/scikit-image.git --branch v$VERSION --single-branch
-pip install scikit-image[docs]==$VERSION
+

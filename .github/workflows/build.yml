@@ -35,7 +35,7 @@ jobs:
       - uses: ammaraskar/sphinx-action@master
         with:
           docs-folder: "build/scikit-image/doc"
-          pre-build-command: "apt-get update -y && apt-get install -y latexmk texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended"
+          pre-build-command: "pip install scikit-image[docs]==0.21.0 && apt-get update -y && apt-get install -y latexmk texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended"
           build-command: "make latexpdf"
       - run: |
           mkdir -p docs
