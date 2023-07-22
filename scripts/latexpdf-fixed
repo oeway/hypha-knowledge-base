@@ -6,5 +6,7 @@ latexpdf-fixed: latex
     sed -i '/\\sphinxDUC{2572}{\\textbackslash}/i \  \\sphinxDUC{5468}{\\sphinxunichar{5468}}' build/latex/scikit-image.tex && \
     sed -i '/\\sphinxDUC{2572}{\\textbackslash}/i \  \\sphinxDUC{4F2F}{\\sphinxunichar{4F2F}}' build/latex/scikit-image.tex && \
     sed -i '/\\sphinxDUC{2572}{\\textbackslash}/i \  \\sphinxDUC{5A01}{\\sphinxunichar{5A01}}' build/latex/scikit-image.tex && \
+    sed -i '/\\sphinxDUC{2572}{\\textbackslash}/i \  \\sphinxDUC{1F389}{\\sphinxunichar{1F389}}' build/latex/scikit-image.tex && \
+    sed -i '/\\sphinxDUC{2572}{\\textbackslash}/i \  \\sphinxDUC{2728}{\\sphinxunichar{2728}}' build/latex/scikit-image.tex && \
     cd build/latex && pdflatex --interaction=nonstopmode scikit-image.tex
 	@echo "pdflatex finished; the PDF files are in build/latex."

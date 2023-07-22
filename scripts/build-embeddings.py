@@ -6,28 +6,32 @@ from langchain.llms import OpenAI
 from langchain.chains import RetrievalQA
 from langchain.document_loaders import TextLoader
 from langchain.schema import Document
-from PyPDF2 import PdfReader
+from langchain.document_loaders import PyPDFLoader
+from tqdm import tqdm
+import chromadb
+assert chromadb.__version__ == "0.4.2"
 
-
-def read_pdf(filepath):
-    """Takes a filepath to a PDF and returns a string of the PDF's contents"""
-    # creating a pdf reader object
-    reader = PdfReader(filepath)
-    pdf_text = ""
-    page_number = 0
-    for page in reader.pages:
-        page_number += 1
-        pdf_text += page.extract_text() + f"\nPage Number: {page_number}"
-    return pdf_text
-
-def text_split(documents: TextLoader):
-        text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
-        texts = text_splitter.split_documents(documents)
-        return texts
-
-def embeddings(texts):
+def create_embeddings_from_pdf(pdf_path, collection_name):
+    # convert pdf to texts
+    loader = PyPDFLoader(pdf_path)
+    # split texts into chunks
+    doc = loader.load()
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
+    documents = text_splitter.split_documents(doc)
+    # create embeddings
     embeddings = OpenAIEmbeddings()
-    
-    vectordb = Chroma.from_documents(texts, embeddings, persist_directory="chroma_db/code_blocks")
+    print(f"Creating embeddings (#documents={len(documents)}))")
+    vectordb = Chroma.from_documents(documents, embeddings, persist_directory="docs/vectordb", collection_name=collection_name)
     return vectordb
 
+if __name__ == "__main__":
+    vectordb = create_embeddings_from_pdf("docs/scikit-image.pdf", collection_name="scikit-image")
+    vectordb.persist()
+    print("Embeddings created")
+
+
+    vectordb = Chroma(collection_name="scikit-image", persist_directory="docs/vectordb", embedding_function=OpenAIEmbeddings())
+    retriever = vectordb.as_retriever(score_threshold=0.4)
+    items = retriever.get_relevant_documents("scikit-image release", verbose=True)
+    print(items)
+    

@@ -1,2 +1,7 @@
 PyPDF2
-langchain
+langchain>=0.0.239
+openai
+tqdm
+chromadb==0.4.2
+tiktoken
+pypdf

@@ -41,8 +41,11 @@ jobs:
         run: |
           mkdir -p docs
           cp build/scikit-image/doc/build/latex/scikit-image.pdf docs/scikit-image.pdf
-      - name: Store docs as artifact
-        uses: actions/upload-artifact@v3
+      - name: Build vector database
+        run: |
+          python scripts/build_vector_database.py
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          name: docs
-          path: ./docs
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
