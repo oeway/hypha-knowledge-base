@@ -45,11 +45,13 @@ jobs:
           mkdir -p docs
           cp build/scikit-image/doc/build/latex/scikit-image.pdf docs/scikit-image.pdf
       - name: Build vector database
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
           python scripts/build_vector_database.py
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       - name: Deploy
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
