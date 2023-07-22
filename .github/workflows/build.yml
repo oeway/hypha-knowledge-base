@@ -38,8 +38,8 @@ jobs:
           pre-build-command: "apt-get update -y && apt-get install -y latexmk texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended"
           build-command: "make latexpdf"
       - run: |
-        mkdir -p docs
-        cp build/latex/scikit-image.pdf ../../../docs/scikit-image.pdf
+          mkdir -p docs
+          cp build/latex/scikit-image.pdf ../../../docs/scikit-image.pdf
       - name: Store docs as artifact
         uses: actions/upload-artifact@v3
         with:
