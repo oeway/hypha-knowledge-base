@@ -31,11 +31,15 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install -r requirements.txt
+      - run: sh scripts/parepare-scikit-image-docs.sh
       - uses: ammaraskar/sphinx-action@master
         with:
-          docs-folder: "./"
+          docs-folder: "build/scikit-image/doc"
           pre-build-command: "apt-get update -y && apt-get install -y latexmk texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended"
-          build-command: "sh scripts/build-scikit-image-docs.sh"
+          build-command: "make latexpdf"
+      - run: |
+        mkdir -p docs
+        cp build/latex/scikit-image.pdf ../../../docs/scikit-image.pdf
       - name: Store docs as artifact
         uses: actions/upload-artifact@v3
         with:
