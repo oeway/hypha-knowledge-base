@@ -3,5 +3,5 @@ latexpdf-fixed: latex
 	$(SPHINXBUILD) -b latex $(ALLSPHINXOPTS) $(DEST)/latex
 	@echo "Running LaTeX files through pdflatex..."
 	sed -i '/\\sphinxDUC{2572}{\\textbackslash}/i \  \\sphinxDUC{2663}{\\sphinxunichar{2663}}' build/latex/scikit-image.tex && \
-    cd build/latex && pdflatex --interaction=nonstopmode --halt-on-error scikit-image.tex
+    cd build/latex && pdflatex --interaction=nonstopmode scikit-image.tex
 	@echo "pdflatex finished; the PDF files are in build/latex."
