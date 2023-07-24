@@ -1,3 +1,4 @@
+import os
 import openai
 from langchain.vectorstores import Chroma
 from langchain.embeddings import OpenAIEmbeddings
@@ -10,6 +11,10 @@ from langchain.document_loaders import PyPDFLoader
 from tqdm import tqdm
 import chromadb
 assert chromadb.__version__ == "0.4.2"
+
+
+SCIKIT_IMAGE_VERSION = os.environ.get("SCIKIT_IMAGE_VERSION")
+assert SCIKIT_IMAGE_VERSION is not None, "Please set SCIKIT_IMAGE_VERSION environment variable"
 
 def create_embeddings_from_pdf(pdf_path, collection_name):
     # convert pdf to texts
@@ -25,7 +30,7 @@ def create_embeddings_from_pdf(pdf_path, collection_name):
     return vectordb
 
 if __name__ == "__main__":
-    vectordb = create_embeddings_from_pdf("docs/scikit-image.pdf", collection_name="scikit-image")
+    vectordb = create_embeddings_from_pdf(f"docs/scikit-image-{SCIKIT_IMAGE_VERSION}.pdf", collection_name="scikit-image")
     vectordb.persist()
     print("Embeddings created")
 
