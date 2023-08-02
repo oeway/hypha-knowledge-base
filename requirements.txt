@@ -1,7 +1,7 @@
 PyPDF2
-langchain>=0.0.239
+langchain>=0.0.249
 openai
 tqdm
-chromadb==0.4.2
+faiss-cpu==1.7.4
 tiktoken
 pypdf
