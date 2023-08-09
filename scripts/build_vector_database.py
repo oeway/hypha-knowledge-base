@@ -23,7 +23,7 @@ def create_embeddings_from_pdf(pdf_path, index_name, output_dir):
     return vectordb
 
 if __name__ == "__main__":
-    vectordb = create_embeddings_from_pdf(f"docs/scikit-image-{SCIKIT_IMAGE_VERSION}.pdf", index_name="scikit-image", "docs/vectordb")
+    vectordb = create_embeddings_from_pdf(f"docs/scikit-image-{SCIKIT_IMAGE_VERSION}.pdf", index_name="scikit-image", output_dir="docs/vectordb")
     print("Embeddings created")
 
     vectordb = FAISS.load_local(folder_path="docs/vectordb", index_name="scikit-image", embeddings=OpenAIEmbeddings())
